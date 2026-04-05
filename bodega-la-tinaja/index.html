@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bodega La Tinaja - Menú Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+html,body{background-color:#0d0505!important;margin:0;padding:0}
+*{box-sizing:border-box}
+.no-scrollbar::-webkit-scrollbar{display:none}
+.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+.glass{background:rgba(255,255,255,0.04);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.09)}
+.cat-btn.active{background-color:#8b1a1a!important;color:#000!important;border-color:#8b1a1a!important}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn 0.5s ease forwards}
+.lang-btn{padding:4px 8px;border-radius:20px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:#8E9299;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;transition:all 0.2s;white-space:nowrap}
+.lang-btn.active{background:#8b1a1a;color:#000;border-color:#8b1a1a}
+.allergen-pill{display:inline-flex;align-items:center;padding:2px 7px;border-radius:9999px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);font-size:8px;color:#aaa;font-weight:700;text-transform:uppercase;margin:2px}
+.card{transition:all 0.3s ease;border-radius:24px;overflow:hidden;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(0,0,0,0.4)}
+.header-name{font-family:'Playfair Display',serif;font-weight:700;color:#8b1a1a;margin:0;line-height:1.2;word-break:break-word;font-size:clamp(11px,2.5vw,18px)}
+</style>
+</head>
+<body style="background:#0d0505">
+<div style="background:#0d0505;color:#fff;min-height:100vh;font-family:'Inter',sans-serif">
+
+<header style="min-height:70px;display:flex;align-items:center;background:rgba(0,0,0,0.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.05);position:sticky;top:0;z-index:100;padding:10px 0">
+  <div style="max-width:1280px;margin:0 auto;padding:0 16px;display:flex;justify-content:space-between;align-items:center;width:100%;gap:12px">
+    <div style="display:flex;align-items:center;gap:10px;min-width:0;flex:1">
+      <div style="width:38px;height:38px;min-width:38px;border-radius:50%;border:1px solid #8b1a1a;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:18px">🍷</div>
+      <div style="min-width:0;overflow:hidden">
+        <h1 class="header-name">Bodega La Tinaja</h1>
+        <p style="font-size:8px;text-transform:uppercase;letter-spacing:0.15em;color:#8E9299;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Authentic Spanish Tapas</p>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+      <div style="display:flex;gap:3px">
+        <button class="lang-btn active" onclick="setLang('es')">ES</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+        <button class="lang-btn" onclick="setLang('va')">VA</button>
+      </div>
+      <button onclick="toggleCart()" style="position:relative;padding:8px;border-radius:50%;background:rgba(255,255,255,0.05);border:none;cursor:pointer;flex-shrink:0">
+        <i data-lucide="shopping-bag" style="color:#8b1a1a;width:20px;height:20px;display:block"></i>
+        <span id="cart-count" style="display:none;position:absolute;top:-4px;right:-4px;background:#8b1a1a;color:#000;font-size:9px;font-weight:900;width:18px;height:18px;border-radius:50%;align-items:center;justify-content:center;border:2px solid #0d0505">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section style="position:relative;height:50vh;display:flex;align-items:flex-end;padding-bottom:3rem;overflow:hidden">
+  <div style="position:absolute;inset:0;z-index:0">
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800" style="width:100%;height:100%;object-fit:cover;opacity:0.55" onerror="this.src='https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=2000'">
+    <div style="position:absolute;inset:0;background:linear-gradient(to top,#0d0505 0%,rgba(10,10,10,0.5) 50%,transparent 100%)"></div>
+  </div>
+  <div style="max-width:1280px;margin:0 auto;padding:0 16px;position:relative;z-index:10">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <div style="height:1px;width:24px;background:#8b1a1a"></div>
+      <span style="color:#8b1a1a;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.2em">Authentic Spanish Tapas</span>
+    </div>
+    <h2 style="font-size:clamp(2rem,6vw,3.5rem);font-family:'Playfair Display',serif;font-weight:700;color:#fff;line-height:1.1;margin:0 0 12px 0">Bodega La Tinaja<br><span style="color:#8b1a1a;font-style:italic">Authentic Spanish Tapas</span></h2>
+    <p style="color:#ccc;font-size:13px;font-weight:300;max-width:480px;line-height:1.6;margin:0">A traditional wine cellar in Barcelona's Ciutat Vella serving classic Spanish tapas and over 90 wines.</p>
+  </div>
+</section>
+
+<div style="position:sticky;top:70px;z-index:40;background:rgba(10,10,10,0.97);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);padding:14px 0">
+  <div id="cat-list" style="max-width:1280px;margin:0 auto;padding:0 16px;display:flex;gap:10px;overflow-x:auto" class="no-scrollbar"></div>
+</div>
+
+<main id="menu-main" style="max-width:1280px;margin:0 auto;padding:48px 16px"></main>
+
+<footer style="background:#1a0a0a;border-top:1px solid rgba(255,255,255,0.05);padding:60px 0 100px">
+  <div style="max-width:1280px;margin:0 auto;padding:0 16px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:40px;margin-bottom:40px">
+      <div>
+        <h3 style="font-size:20px;font-family:'Playfair Display',serif;font-weight:700;color:#8b1a1a;margin:0 0 12px 0">Bodega La Tinaja</h3>
+        <p style="color:#8E9299;font-size:13px;line-height:1.7;font-style:italic">"A traditional wine cellar in Barcelona's Ciutat Vella serving classic Spanish tapas and over 90 wines."</p>
+      </div>
+      <div>
+        <h4 style="font-size:16px;font-family:'Playfair Display',serif;color:#fff;margin:0 0 16px 0;border-bottom:1px solid #8b1a1a33;padding-bottom:8px">Ubicación y Contacto</h4>
+        <ul style="list-style:none;padding:0;margin:0;color:#8E9299;font-size:13px;display:flex;flex-direction:column;gap:8px">
+          <li>📍 Ciutat Vella, Barcelona</li>
+          <li>📞 +34963914460</li>
+          <li>🌐 <a href="https://bodega-la-tinaja.com-place.com" target="_blank" style="color:#8b1a1a;text-decoration:none">bodega-la-tinaja.com-place.com</a></li>
+          <li>🕐 Not specified</li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="font-size:16px;font-family:'Playfair Display',serif;color:#fff;margin:0 0 16px 0;border-bottom:1px solid #8b1a1a33;padding-bottom:8px">Alérgenos (RD 126/2015)</h4>
+        <div style="display:flex;flex-wrap:wrap;gap:4px">
+          <span class="allergen-pill">🌾 Gluten</span><span class="allergen-pill">🦐 Crustáceos</span><span class="allergen-pill">🥚 Huevos</span><span class="allergen-pill">🐟 Pescado</span><span class="allergen-pill">🥜 Cacahuetes</span><span class="allergen-pill">🫘 Soja</span><span class="allergen-pill">🥛 Lácteos</span><span class="allergen-pill">🌰 Frutos secos</span><span class="allergen-pill">🌿 Apio</span><span class="allergen-pill">🌼 Mostaza</span><span class="allergen-pill">⚪ Sésamo</span><span class="allergen-pill">🍷 Sulfitos</span><span class="allergen-pill">🌸 Altramuces</span><span class="allergen-pill">🦑 Moluscos</span>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:24px;text-align:center">
+      <p style="font-size:10px;color:rgba(142,146,153,0.6);text-transform:uppercase;letter-spacing:0.2em;margin:0">© 2026 Bodega La Tinaja · Powered by <a href="https://digilabapp.com" target="_blank" style="color:#8b1a1a;text-decoration:none">DigiLab</a></p>
+    </div>
+  </div>
+</footer>
+
+<button onclick="sendOrder()" style="position:fixed;bottom:24px;right:24px;z-index:200;display:flex;align-items:center;gap:12px;background:#000;padding:14px 20px;border-radius:9999px;box-shadow:0 25px 50px rgba(0,0,0,0.5);border:2px solid #8b1a1a;cursor:pointer">
+  <i data-lucide="message-circle" style="color:#8b1a1a;width:22px;height:22px"></i>
+  <span id="wa-btn-text" style="font-weight:900;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#8b1a1a">Pedir por WhatsApp</span>
+</button>
+
+<div id="cart-drawer" style="display:none;position:fixed;inset:0;z-index:300">
+  <div style="position:absolute;inset:0;background:rgba(0,0,0,0.9)" onclick="toggleCart()"></div>
+  <div style="position:absolute;top:0;right:0;bottom:0;width:100%;max-width:400px;background:#1a0a0a;border-left:1px solid rgba(255,255,255,0.05);display:flex;flex-direction:column">
+    <div style="padding:24px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;align-items:center;background:#000">
+      <h3 id="cart-title" style="font-size:20px;font-weight:700;color:#fff;margin:0">Tu Pedido</h3>
+      <button onclick="toggleCart()" style="background:transparent;border:none;color:#fff;cursor:pointer;font-size:20px">✕</button>
+    </div>
+    <div id="cart-items" style="flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:16px"></div>
+    <div id="cart-footer" style="display:none;padding:24px;background:#000;border-top:1px solid rgba(255,255,255,0.05)">
+      <div style="display:flex;justify-content:space-between;margin-bottom:16px">
+        <span style="color:#8E9299;font-size:11px;font-weight:900;text-transform:uppercase">Total</span>
+        <span id="cart-total" style="font-size:28px;font-weight:700;color:#8b1a1a">€0.00</span>
+      </div>
+      <button onclick="sendOrder()" style="width:100%;padding:16px;border-radius:16px;background:#8b1a1a;color:#000;font-weight:900;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;border:none;cursor:pointer">Confirmar Pedido</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const menuData = [{"id":"i1","category":"cat1","name_es":"Tortilla de Patatas","name_en":"Spanish Omelette","name_fr":"Omelette Espagnole","name_va":"Truita de Patates","desc_es":"Tortilla clásica de huevos y patatas perfecta","desc_en":"Classic perfect blend of eggs and potatoes","desc_fr":"Mélange parfait d'œufs et de pommes de terre","desc_va":"Clàssica mescla d'ous i patates perfecta","price":4.5,"image":"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800","allergens":["Huevos"],"popular":true},{"id":"i2","category":"cat1","name_es":"Pan con Tomate","name_en":"Bread with Tomato","name_fr":"Pain à la Tomate","name_va":"Pa amb Tomàquet","desc_es":"Pan tostado con tomate fresco, ajo y aceite","desc_en":"Toasted bread with fresh tomato, garlic and olive oil","desc_fr":"Pain grillé à la tomate fraîche, ail et huile","desc_va":"Pa torrat amb tomàquet fresc, all i oli","price":3.5,"image":"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800","allergens":["Gluten"],"popular":true},{"id":"i3","category":"cat2","name_es":"Chistorra","name_en":"Chistorra Sausage","name_fr":"Saucisse Chistorra","name_va":"Chistorra","desc_es":"Sabrosa salchicha aragonesa a la plancha","desc_en":"Flavourful Aragonese sausage grilled to perfection","desc_fr":"Savoureuse saucisse aragonaise grillée","desc_va":"Saborosa salsitxa aragonesa a la planxa","price":5.5,"image":"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800","allergens":["Gluten","Sulfitos"],"popular":true},{"id":"i4","category":"cat2","name_es":"Cecina","name_en":"Cured Beef","name_fr":"Bœuf Séché","name_va":"Cecina","desc_es":"Cecina curada de vacuno en lonchas finas","desc_en":"Thinly sliced cured and dried beef","desc_fr":"Bœuf séché et affiné en fines tranches","desc_va":"Cecina curada de boví en llesques fines","price":6.5,"image":"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800","allergens":["Sulfitos"],"popular":false},{"id":"i5","category":"cat2","name_es":"Jamón Ibérico","name_en":"Iberian Ham","name_fr":"Jambon Ibérique","name_va":"Pernil Ibèric","desc_es":"Lonchas de jamón ibérico de bellota","desc_en":"Slices of acorn-fed Iberian ham","desc_fr":"Tranches de jambon ibérique aux glands","desc_va":"Llesques de pernil ibèric de gla","price":8,"image":"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800","allergens":["Sulfitos"],"popular":false},{"id":"i6","category":"cat3","name_es":"Tabla de Quesos","name_en":"Cheese Board","name_fr":"Plateau de Fromages","name_va":"Taula de Formatges","desc_es":"Selección de quesos españoles artesanales","desc_en":"Selection of artisan Spanish cheeses","desc_fr":"Sélection de fromages espagnols artisanaux","desc_va":"Selecció de formatges espanyols artesans","price":7.5,"image":"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800","allergens":["Lácteos"],"popular":false},{"id":"i7","category":"cat3","name_es":"Queso Manchego","name_en":"Manchego Cheese","name_fr":"Fromage Manchego","name_va":"Formatge Manchego","desc_es":"Queso manchego curado con membrillo","desc_en":"Cured manchego cheese with quince jelly","desc_fr":"Fromage manchego affiné avec confiture de coing","desc_va":"Formatge manchego curat amb codony","price":5,"image":"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800","allergens":["Lácteos"],"popular":false},{"id":"i8","category":"cat1","name_es":"Patatas Bravas","name_en":"Spicy Potatoes","name_fr":"Pommes de Terre Épicées","name_va":"Patates Braves","desc_es":"Patatas fritas con salsa brava picante","desc_en":"Fried potatoes with spicy tomato sauce","desc_fr":"Pommes de terre frites sauce épicée","desc_va":"Patates fregides amb salsa brava picant","price":4,"image":"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800","allergens":["Gluten","Huevos"],"popular":false},{"id":"i9","category":"cat1","name_es":"Aceitunas Marinadas","name_en":"Marinated Olives","name_fr":"Olives Marinées","name_va":"Olives Marinades","desc_es":"Aceitunas variadas marinadas con hierbas","desc_en":"Mixed olives marinated with herbs and spices","desc_fr":"Olives variées marinées aux herbes","desc_va":"Olives variades marinades amb herbes","price":3,"image":"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800","allergens":[],"popular":false},{"id":"i10","category":"cat1","name_es":"Anchoas del Cantábrico","name_en":"Cantabrian Anchovies","name_fr":"Anchois Cantabriques","name_va":"Anxoves del Cantàbric","desc_es":"Anchoas en aceite de oliva virgen extra","desc_en":"Anchovies in extra virgin olive oil","desc_fr":"Anchois à l'huile d'olive vierge extra","desc_va":"Anxoves en oli d'oliva verge extra","price":6,"image":"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800","allergens":["Pescado"],"popular":false},{"id":"i11","category":"cat4","name_es":"Vino de la Casa","name_en":"House Wine","name_fr":"Vin de la Maison","name_va":"Vi de la Casa","desc_es":"Selección de vinos tintos, blancos y rosados","desc_en":"Selection of red, white and rosé wines","desc_fr":"Sélection de vins rouges, blancs et rosés","desc_va":"Selecció de vins negres, blancs i rosats","price":3.5,"image":"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800","allergens":["Sulfitos"],"popular":false},{"id":"i12","category":"cat4","name_es":"Vermut","name_en":"Vermouth","name_fr":"Vermouth","name_va":"Vermut","desc_es":"Vermut artesanal servido con naranja y oliva","desc_en":"Artisan vermouth with orange and olive","desc_fr":"Vermouth artisanal à l'orange et olive","desc_va":"Vermut artesà amb taronja i oliva","price":4,"image":"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800","allergens":["Sulfitos"],"popular":false}];
+const categories = [{"id":"cat1","name_es":"Tapas","name_en":"Tapas","name_fr":"Tapas","name_va":"Tapes"},{"id":"cat2","name_es":"Embutidos","name_en":"Charcuterie","name_fr":"Charcuterie","name_va":"Embotits"},{"id":"cat3","name_es":"Quesos","name_en":"Cheeses","name_fr":"Fromages","name_va":"Formatges"},{"id":"cat4","name_es":"Bebidas","name_en":"Drinks","name_fr":"Boissons","name_va":"Begudes"}];
+const PHONE = '34963914460';
+const PRIMARY_COLOR = '#8b1a1a';
+const translations = {
+  es: { cart_title: 'Tu Pedido', add_btn: 'Añadir', recommended: 'Recomendado', whatsapp_btn: 'Pedir por WhatsApp', empty_cart: 'Tu carrito está vacío' },
+  en: { cart_title: 'Your Order', add_btn: 'Add', recommended: 'Recommended', whatsapp_btn: 'Order via WhatsApp', empty_cart: 'Your cart is empty' },
+  fr: { cart_title: 'Votre Commande', add_btn: 'Ajouter', recommended: 'Recommandé', whatsapp_btn: 'Commander via WhatsApp', empty_cart: 'Votre panier est vide' },
+  va: { cart_title: 'La teua Comanda', add_btn: 'Afegir', recommended: 'Recomanat', whatsapp_btn: 'Demanar per WhatsApp', empty_cart: 'El teu carret està buit' }
+};
+let cart = [], lang = 'es';
+
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === l.toUpperCase()));
+  document.getElementById('cart-title').textContent = translations[l].cart_title;
+  document.getElementById('wa-btn-text').textContent = translations[l].whatsapp_btn;
+  renderCats(); renderMenu();
+}
+
+function renderCats() {
+  const c = document.getElementById('cat-list');
+  c.innerHTML = categories.map((cat, i) => `<button onclick="scrollTocat('${cat.id}')" id="btn-${cat.id}" style="padding:8px 20px;border-radius:9999px;border:1px solid rgba(255,255,255,0.1);background:${i===0?PRIMARY_COLOR:'rgba(255,255,255,0.05)'};color:${i===0?'#000':'#8E9299'};font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;cursor:pointer;transition:all 0.2s" class="cat-btn ${i===0?'active':''}">${cat['name_'+lang] || cat.name_es}</button>`).join('');
+}
+
+function renderMenu() {
+  const m = document.getElementById('menu-main');
+  m.innerHTML = categories.map(cat => {
+    const items = menuData.filter(i => i.category === cat.id);
+    if (!items.length) return '';
+    return `<section id="${cat.id}" style="margin-bottom:60px;scroll-margin-top:150px">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px">
+        <h3 style="font-size:28px;font-family:'Playfair Display',serif;font-weight:700;color:${PRIMARY_COLOR};margin:0">${cat['name_'+lang] || cat.name_es}</h3>
+        <div style="height:1px;flex:1;background:${PRIMARY_COLOR}33"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px">
+        ${items.map(item => `
+          <div class="glass card">
+            <div style="position:relative;height:200px;overflow:hidden">
+              <img src="${item.image}" style="width:100%;height:100%;object-fit:cover;transition:transform 0.7s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" onerror="this.src='https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800'">
+              ${item.popular ? `<span style="position:absolute;top:12px;left:12px;background:${PRIMARY_COLOR};color:#000;font-size:8px;font-weight:900;padding:4px 10px;border-radius:9999px;text-transform:uppercase">${translations[lang].recommended}</span>` : ''}
+            </div>
+            <div style="padding:20px;flex:1;display:flex;flex-direction:column">
+              <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px">
+                <h4 style="font-size:17px;font-family:'Playfair Display',serif;font-weight:700;color:#fff;margin:0;flex:1">${item['name_'+lang] || item.name_es}</h4>
+                <span style="color:${PRIMARY_COLOR};font-weight:700;font-size:16px;margin-left:8px">€${item.price.toFixed(2)}</span>
+              </div>
+              <p style="color:#8E9299;font-size:11px;font-style:italic;margin:0 0 12px 0;line-height:1.5">${item['desc_'+lang] || item.desc_es}</p>
+              ${item.allergens && item.allergens.length ? `<div style="margin-bottom:12px;display:flex;flex-wrap:wrap">${item.allergens.map(a=>`<span class="allergen-pill">${a}</span>`).join('')}</div>` : ''}
+              <button onclick="addToCart('${item.id}')" style="margin-top:auto;width:100%;padding:12px;border-radius:12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#fff;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;transition:all 0.3s" onmouseover="this.style.background=PRIMARY_COLOR;this.style.color='#000'" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.color='#fff'">${translations[lang].add_btn}</button>
+            </div>
+          </div>`).join('')}
+      </div>
+    </section>`;
+  }).join('');
+}
+
+function scrollTocat(id) {
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelectorAll('.cat-btn').forEach(b => { b.style.background='rgba(255,255,255,0.05)'; b.style.color='#8E9299'; b.classList.remove('active'); });
+  const btn = document.getElementById('btn-'+id);
+  if (btn) { btn.style.background=PRIMARY_COLOR; btn.style.color='#000'; btn.classList.add('active'); }
+}
+
+function addToCart(id) {
+  const item = menuData.find(i => i.id === id);
+  if (item) { cart.push({...item, cartId: Date.now()}); updateCart(); }
+}
+
+function updateCart() {
+  const count = document.getElementById('cart-count');
+  const items = document.getElementById('cart-items');
+  const footer = document.getElementById('cart-footer');
+  const total = document.getElementById('cart-total');
+  if (count) { count.textContent = cart.length; count.style.display = cart.length ? 'flex' : 'none'; }
+  if (items) {
+    if (!cart.length) { items.innerHTML = `<div style="text-align:center;color:#8E9299;font-style:italic;padding:40px 0">${translations[lang].empty_cart}</div>`; if (footer) footer.style.display='none'; }
+    else {
+      items.innerHTML = cart.map((item,idx) => `<div style="display:flex;gap:12px;align-items:center;background:rgba(255,255,255,0.05);padding:12px;border-radius:12px"><img src="${item.image}" style="width:52px;height:52px;border-radius:8px;object-fit:cover" onerror="this.src='https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800'"><div style="flex:1"><p style="color:#fff;font-weight:700;font-size:13px;margin:0">${item['name_'+lang] || item.name_es}</p><p style="color:${PRIMARY_COLOR};font-size:12px;font-weight:700;margin:4px 0 0 0">€${item.price.toFixed(2)}</p></div><button onclick="removeFromCart(${idx})" style="background:transparent;border:none;color:#ef4444;cursor:pointer;font-size:18px">✕</button></div>`).join('');
+      if (footer) footer.style.display='block';
+      if (total) total.textContent = '€' + cart.reduce((s,i)=>s+i.price,0).toFixed(2);
+    }
+  }
+}
+
+function removeFromCart(idx) { cart.splice(idx,1); updateCart(); }
+function toggleCart() { const d=document.getElementById('cart-drawer'); if(d) d.style.display=d.style.display==='none'?'block':'none'; }
+function sendOrder() {
+  if (!cart.length) { alert('Añade algo al carrito primero'); return; }
+  const total = cart.reduce((s,i)=>s+i.price,0);
+  const text = 'Hola! Me gustaria hacer un pedido:\n\n' + cart.map(i=>('- ' + (i['name_es'] || i.name_es) + ' (EUR' + i.price.toFixed(2) + ')')).join('\n') + '\n\nTotal: EUR' + total.toFixed(2);
+  window.open('https://wa.me/' + PHONE + '?text=' + encodeURIComponent(text), '_blank');
+}
+
+window.addEventListener('load', () => { renderCats(); renderMenu(); if(window.lucide) lucide.createIcons(); });
+</script>
+</div>
+</body>
+</html>
