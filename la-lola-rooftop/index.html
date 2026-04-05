@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Lola Rooftop - Menú Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+html,body{background-color:#0d0505!important;margin:0;padding:0}
+*{box-sizing:border-box}
+.no-scrollbar::-webkit-scrollbar{display:none}
+.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+.glass{background:rgba(255,255,255,0.04);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.09)}
+.cat-btn.active{background-color:#c0392b!important;color:#000!important;border-color:#c0392b!important}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn 0.5s ease forwards}
+.lang-btn{padding:4px 8px;border-radius:20px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:#8E9299;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;transition:all 0.2s;white-space:nowrap}
+.lang-btn.active{background:#c0392b;color:#000;border-color:#c0392b}
+.allergen-pill{display:inline-flex;align-items:center;padding:2px 7px;border-radius:9999px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);font-size:8px;color:#aaa;font-weight:700;text-transform:uppercase;margin:2px}
+.card{transition:all 0.3s ease;border-radius:24px;overflow:hidden;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(0,0,0,0.4)}
+.header-name{font-family:'Playfair Display',serif;font-weight:700;color:#c0392b;margin:0;line-height:1.2;word-break:break-word;font-size:clamp(11px,2.5vw,18px)}
+</style>
+</head>
+<body style="background:#0d0505">
+<div style="background:#0d0505;color:#fff;min-height:100vh;font-family:'Inter',sans-serif">
+
+<header style="min-height:70px;display:flex;align-items:center;background:rgba(0,0,0,0.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.05);position:sticky;top:0;z-index:100;padding:10px 0">
+  <div style="max-width:1280px;margin:0 auto;padding:0 16px;display:flex;justify-content:space-between;align-items:center;width:100%;gap:12px">
+    <div style="display:flex;align-items:center;gap:10px;min-width:0;flex:1">
+      <div style="width:38px;height:38px;min-width:38px;border-radius:50%;border:1px solid #c0392b;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:18px">🥘</div>
+      <div style="min-width:0;overflow:hidden">
+        <h1 class="header-name">La Lola Rooftop</h1>
+        <p style="font-size:8px;text-transform:uppercase;letter-spacing:0.15em;color:#8E9299;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tapas & Paella en Valencia</p>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+      <div style="display:flex;gap:3px">
+        <button class="lang-btn active" onclick="setLang('es')">ES</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+        <button class="lang-btn" onclick="setLang('va')">VA</button>
+      </div>
+      <button onclick="toggleCart()" style="position:relative;padding:8px;border-radius:50%;background:rgba(255,255,255,0.05);border:none;cursor:pointer;flex-shrink:0">
+        <i data-lucide="shopping-bag" style="color:#c0392b;width:20px;height:20px;display:block"></i>
+        <span id="cart-count" style="display:none;position:absolute;top:-4px;right:-4px;background:#c0392b;color:#000;font-size:9px;font-weight:900;width:18px;height:18px;border-radius:50%;align-items:center;justify-content:center;border:2px solid #0d0505">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section style="position:relative;height:50vh;display:flex;align-items:flex-end;padding-bottom:3rem;overflow:hidden">
+  <div style="position:absolute;inset:0;z-index:0">
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800" style="width:100%;height:100%;object-fit:cover;opacity:0.55" onerror="this.src='https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=2000'">
+    <div style="position:absolute;inset:0;background:linear-gradient(to top,#0d0505 0%,rgba(10,10,10,0.5) 50%,transparent 100%)"></div>
+  </div>
+  <div style="max-width:1280px;margin:0 auto;padding:0 16px;position:relative;z-index:10">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <div style="height:1px;width:24px;background:#c0392b"></div>
+      <span style="color:#c0392b;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.2em">Tapas & Paella en Valencia</span>
+    </div>
+    <h2 style="font-size:clamp(2rem,6vw,3.5rem);font-family:'Playfair Display',serif;font-weight:700;color:#fff;line-height:1.1;margin:0 0 12px 0">La Lola Rooftop<br><span style="color:#c0392b;font-style:italic">Tapas & Paella en Valencia</span></h2>
+    <p style="color:#ccc;font-size:13px;font-weight:300;max-width:480px;line-height:1.6;margin:0">Authentic gluten-free tapas, rice dishes and paella near Valencia Cathedral.</p>
+  </div>
+</section>
+
+<div style="position:sticky;top:70px;z-index:40;background:rgba(10,10,10,0.97);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);padding:14px 0">
+  <div id="cat-list" style="max-width:1280px;margin:0 auto;padding:0 16px;display:flex;gap:10px;overflow-x:auto" class="no-scrollbar"></div>
+</div>
+
+<main id="menu-main" style="max-width:1280px;margin:0 auto;padding:48px 16px"></main>
+
+<footer style="background:#1a0a0a;border-top:1px solid rgba(255,255,255,0.05);padding:60px 0 100px">
+  <div style="max-width:1280px;margin:0 auto;padding:0 16px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:40px;margin-bottom:40px">
+      <div>
+        <h3 style="font-size:20px;font-family:'Playfair Display',serif;font-weight:700;color:#c0392b;margin:0 0 12px 0">La Lola Rooftop</h3>
+        <p style="color:#8E9299;font-size:13px;line-height:1.7;font-style:italic">"Authentic gluten-free tapas, rice dishes and paella near Valencia Cathedral."</p>
+      </div>
+      <div>
+        <h4 style="font-size:16px;font-family:'Playfair Display',serif;color:#fff;margin:0 0 16px 0;border-bottom:1px solid #c0392b33;padding-bottom:8px">Ubicación y Contacto</h4>
+        <ul style="list-style:none;padding:0;margin:0;color:#8E9299;font-size:13px;display:flex;flex-direction:column;gap:8px">
+          <li>📍 Carrer de la Subida del Toledano, 8, 46001 Valencia, Spain</li>
+          <li>📞 +34963153654</li>
+          <li>🌐 <a href="https://lalola-restaurante.menustic.com/" target="_blank" style="color:#c0392b;text-decoration:none">lalola-restaurante.menustic.com/</a></li>
+          <li>🕐 Mon: 1:30pm–3:30pm, 8:30pm–11:30pm</li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="font-size:16px;font-family:'Playfair Display',serif;color:#fff;margin:0 0 16px 0;border-bottom:1px solid #c0392b33;padding-bottom:8px">Alérgenos (RD 126/2015)</h4>
+        <div style="display:flex;flex-wrap:wrap;gap:4px">
+          <span class="allergen-pill">🌾 Gluten</span><span class="allergen-pill">🦐 Crustáceos</span><span class="allergen-pill">🥚 Huevos</span><span class="allergen-pill">🐟 Pescado</span><span class="allergen-pill">🥜 Cacahuetes</span><span class="allergen-pill">🫘 Soja</span><span class="allergen-pill">🥛 Lácteos</span><span class="allergen-pill">🌰 Frutos secos</span><span class="allergen-pill">🌿 Apio</span><span class="allergen-pill">🌼 Mostaza</span><span class="allergen-pill">⚪ Sésamo</span><span class="allergen-pill">🍷 Sulfitos</span><span class="allergen-pill">🌸 Altramuces</span><span class="allergen-pill">🦑 Moluscos</span>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:24px;text-align:center">
+      <p style="font-size:10px;color:rgba(142,146,153,0.6);text-transform:uppercase;letter-spacing:0.2em;margin:0">© 2026 La Lola Rooftop · Powered by <a href="https://digilabapp.com" target="_blank" style="color:#c0392b;text-decoration:none">DigiLab</a></p>
+    </div>
+  </div>
+</footer>
+
+<button onclick="sendOrder()" style="position:fixed;bottom:24px;right:24px;z-index:200;display:flex;align-items:center;gap:12px;background:#000;padding:14px 20px;border-radius:9999px;box-shadow:0 25px 50px rgba(0,0,0,0.5);border:2px solid #c0392b;cursor:pointer">
+  <i data-lucide="message-circle" style="color:#c0392b;width:22px;height:22px"></i>
+  <span id="wa-btn-text" style="font-weight:900;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#c0392b">Pedir por WhatsApp</span>
+</button>
+
+<div id="cart-drawer" style="display:none;position:fixed;inset:0;z-index:300">
+  <div style="position:absolute;inset:0;background:rgba(0,0,0,0.9)" onclick="toggleCart()"></div>
+  <div style="position:absolute;top:0;right:0;bottom:0;width:100%;max-width:400px;background:#1a0a0a;border-left:1px solid rgba(255,255,255,0.05);display:flex;flex-direction:column">
+    <div style="padding:24px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;align-items:center;background:#000">
+      <h3 id="cart-title" style="font-size:20px;font-weight:700;color:#fff;margin:0">Tu Pedido</h3>
+      <button onclick="toggleCart()" style="background:transparent;border:none;color:#fff;cursor:pointer;font-size:20px">✕</button>
+    </div>
+    <div id="cart-items" style="flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:16px"></div>
+    <div id="cart-footer" style="display:none;padding:24px;background:#000;border-top:1px solid rgba(255,255,255,0.05)">
+      <div style="display:flex;justify-content:space-between;margin-bottom:16px">
+        <span style="color:#8E9299;font-size:11px;font-weight:900;text-transform:uppercase">Total</span>
+        <span id="cart-total" style="font-size:28px;font-weight:700;color:#c0392b">€0.00</span>
+      </div>
+      <button onclick="sendOrder()" style="width:100%;padding:16px;border-radius:16px;background:#c0392b;color:#000;font-weight:900;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;border:none;cursor:pointer">Confirmar Pedido</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const menuData = [{"id":"i1","category":"cat1","name_es":"Ensalada Espinacas y Cabra","name_en":"Spinach & Goat Cheese Salad","name_fr":"Salade Épinards Chèvre","name_va":"Amanida Espinacs i Cabra","desc_es":"Espinacas, queso de cabra, vinagreta de mostaza y naranja","desc_en":"Spinach, goat cheese, mature mustard and orange vinaigrette","desc_fr":"Épinards, chèvre, vinaigrette moutarde orange","desc_va":"Espinacs, cabra, vinagreta mostassa i taronja","price":9.5,"image":"https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800","allergens":["Lácteos","Mostaza"],"popular":false},{"id":"i2","category":"cat2","name_es":"Paella Valenciana","name_en":"Valencian Paella","name_fr":"Paella Valencienne","name_va":"Paella Valenciana","desc_es":"Paella tradicional con arroz variedad Albufera DO Valencia","desc_en":"Traditional paella with Albufera DO Valencia rice","desc_fr":"Paella traditionnelle riz Albufera DO Valencia","desc_va":"Paella tradicional amb arròs Albufera DO Valencia","price":16.5,"image":"https://images.unsplash.com/photo-1534080564583-6be75777b70a?w=800","allergens":["Crustáceos","Moluscos"],"popular":true},{"id":"i3","category":"cat3","name_es":"Arroz Meloso Mariscos","name_en":"Creamy Seafood Rice","name_fr":"Riz Crémeux Fruits de Mer","name_va":"Arròs Melós Marisc","desc_es":"Arroz meloso con mariscos frescos y caldo casero","desc_en":"Creamy rice with fresh seafood and homemade broth","desc_fr":"Riz crémeux aux fruits de mer et bouillon maison","desc_va":"Arròs melós amb marisc fresc i brou casolà","price":18.5,"image":"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800","allergens":["Crustáceos","Moluscos","Pescado"],"popular":true},{"id":"i4","category":"cat2","name_es":"Croquetas de Jamón","name_en":"Ham Croquettes","name_fr":"Croquettes Jambon","name_va":"Croquetes de Pernil","desc_es":"Croquetas caseras crujientes de jamón ibérico","desc_en":"Crispy homemade Iberian ham croquettes","desc_fr":"Croquettes maison croustillantes au jambon ibérique","desc_va":"Croquetes casolanes cruixents de pernil ibèric","price":7.5,"image":"https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=800","allergens":["Gluten","Lácteos","Huevos"],"popular":false},{"id":"i5","category":"cat2","name_es":"Patatas Bravas","name_en":"Spicy Potatoes","name_fr":"Pommes Bravas","name_va":"Patates Braves","desc_es":"Patatas fritas con salsa brava y alioli casero","desc_en":"Fried potatoes with spicy sauce and homemade aioli","desc_fr":"Pommes frites, sauce piquante et aïoli maison","desc_va":"Patates fregides amb salsa brava i allioli casolà","price":5.5,"image":"https://images.unsplash.com/photo-1590301157890-4810ed352733?w=800","allergens":["Huevos"],"popular":false},{"id":"i6","category":"cat2","name_es":"Pulpo a la Gallega","name_en":"Galician Octopus","name_fr":"Poulpe Galicien","name_va":"Pop a la Gallega","desc_es":"Pulpo tierno con pimentón, aceite y patata","desc_en":"Tender octopus with paprika, olive oil and potato","desc_fr":"Pieuvre tendre, paprika, huile d'olive et pomme de terre","desc_va":"Pop tendre amb pebre, oli i patata","price":11.5,"image":"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800","allergens":["Moluscos"],"popular":false},{"id":"i7","category":"cat2","name_es":"Gambas al Ajillo","name_en":"Garlic Prawns","name_fr":"Crevettes à l'Ail","name_va":"Gambetes a l'All","desc_es":"Gambas salteadas con ajo, guindilla y aceite de oliva","desc_en":"Sautéed prawns with garlic, chili and olive oil","desc_fr":"Crevettes sautées ail, piment et huile d'olive","desc_va":"Gambetes saltejades amb all, bitxo i oli d'oliva","price":10.5,"image":"https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800","allergens":["Crustáceos"],"popular":false},{"id":"i8","category":"cat3","name_es":"Arroz Negro","name_en":"Black Rice","name_fr":"Riz Noir","name_va":"Arròs Negre","desc_es":"Arroz negro con sepia y alioli de azafrán","desc_en":"Black rice with cuttlefish and saffron aioli","desc_fr":"Riz noir avec seiche et aïoli au safran","desc_va":"Arròs negre amb sípia i allioli de safrà","price":17.5,"image":"https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800","allergens":["Moluscos","Huevos"],"popular":true},{"id":"i9","category":"cat2","name_es":"Tabla de Ibéricos","name_en":"Iberian Charcuterie Board","name_fr":"Plateau Ibérique","name_va":"Tauler d'Ibèrics","desc_es":"Selección de embutidos ibéricos con pan tostado","desc_en":"Selection of Iberian cold cuts with toasted bread","desc_fr":"Sélection charcuteries ibériques et pain grillé","desc_va":"Selecció d'embotits ibèrics amb pa torrat","price":13.5,"image":"https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800","allergens":["Gluten"],"popular":false},{"id":"i10","category":"cat4","name_es":"Sorbete de Limón al Cava","name_en":"Cava Lemon Sorbet","name_fr":"Sorbet Citron Cava","name_va":"Sorbet de Llimó al Cava","desc_es":"Refrescante sorbete de limón con espumoso cava","desc_en":"Refreshing lemon sorbet with sparkling cava","desc_fr":"Sorbet citron rafraîchissant au cava pétillant","desc_va":"Refrescant sorbet de llimó amb cava escumós","price":6.5,"image":"https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800","allergens":["Sulfitos"],"popular":false},{"id":"i11","category":"cat4","name_es":"Crema Catalana","name_en":"Crema Catalana","name_fr":"Crème Catalane","name_va":"Crema Catalana","desc_es":"Crema tradicional con costra de azúcar caramelizado","desc_en":"Traditional cream with caramelised sugar crust","desc_fr":"Crème traditionnelle, croûte de sucre caramélisé","desc_va":"Crema tradicional amb crosta de sucre caramel·litzat","price":5.5,"image":"https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800","allergens":["Lácteos","Huevos"],"popular":false},{"id":"i12","category":"cat2","name_es":"Pimientos de Padrón","name_en":"Padrón Peppers","name_fr":"Poivrons de Padrón","name_va":"Pebrots de Padrón","desc_es":"Pimientos de Padrón fritos con sal gruesa","desc_en":"Fried Padrón peppers with coarse sea salt","desc_fr":"Poivrons Padrón frits au gros sel","desc_va":"Pebrots de Padrón fregits amb sal gruixuda","price":5,"image":"https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800","allergens":[],"popular":false}];
+const categories = [{"id":"cat1","name_es":"Ensaladas","name_en":"Salads","name_fr":"Salades","name_va":"Amanides"},{"id":"cat2","name_es":"Tapas","name_en":"Tapas","name_fr":"Tapas","name_va":"Tapes"},{"id":"cat3","name_es":"Arroces","name_en":"Rice","name_fr":"Riz","name_va":"Arrossos"},{"id":"cat4","name_es":"Postres","name_en":"Desserts","name_fr":"Desserts","name_va":"Postres"}];
+const PHONE = '34963153654';
+const PRIMARY_COLOR = '#c0392b';
+const translations = {
+  es: { cart_title: 'Tu Pedido', add_btn: 'Añadir', recommended: 'Recomendado', whatsapp_btn: 'Pedir por WhatsApp', empty_cart: 'Tu carrito está vacío' },
+  en: { cart_title: 'Your Order', add_btn: 'Add', recommended: 'Recommended', whatsapp_btn: 'Order via WhatsApp', empty_cart: 'Your cart is empty' },
+  fr: { cart_title: 'Votre Commande', add_btn: 'Ajouter', recommended: 'Recommandé', whatsapp_btn: 'Commander via WhatsApp', empty_cart: 'Votre panier est vide' },
+  va: { cart_title: 'La teua Comanda', add_btn: 'Afegir', recommended: 'Recomanat', whatsapp_btn: 'Demanar per WhatsApp', empty_cart: 'El teu carret està buit' }
+};
+let cart = [], lang = 'es';
+
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === l.toUpperCase()));
+  document.getElementById('cart-title').textContent = translations[l].cart_title;
+  document.getElementById('wa-btn-text').textContent = translations[l].whatsapp_btn;
+  renderCats(); renderMenu();
+}
+
+function renderCats() {
+  const c = document.getElementById('cat-list');
+  c.innerHTML = categories.map((cat, i) => `<button onclick="scrollTocat('${cat.id}')" id="btn-${cat.id}" style="padding:8px 20px;border-radius:9999px;border:1px solid rgba(255,255,255,0.1);background:${i===0?PRIMARY_COLOR:'rgba(255,255,255,0.05)'};color:${i===0?'#000':'#8E9299'};font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;cursor:pointer;transition:all 0.2s" class="cat-btn ${i===0?'active':''}">${cat['name_'+lang] || cat.name_es}</button>`).join('');
+}
+
+function renderMenu() {
+  const m = document.getElementById('menu-main');
+  m.innerHTML = categories.map(cat => {
+    const items = menuData.filter(i => i.category === cat.id);
+    if (!items.length) return '';
+    return `<section id="${cat.id}" style="margin-bottom:60px;scroll-margin-top:150px">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px">
+        <h3 style="font-size:28px;font-family:'Playfair Display',serif;font-weight:700;color:${PRIMARY_COLOR};margin:0">${cat['name_'+lang] || cat.name_es}</h3>
+        <div style="height:1px;flex:1;background:${PRIMARY_COLOR}33"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px">
+        ${items.map(item => `
+          <div class="glass card">
+            <div style="position:relative;height:200px;overflow:hidden">
+              <img src="${item.image}" style="width:100%;height:100%;object-fit:cover;transition:transform 0.7s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" onerror="this.src='https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800'">
+              ${item.popular ? `<span style="position:absolute;top:12px;left:12px;background:${PRIMARY_COLOR};color:#000;font-size:8px;font-weight:900;padding:4px 10px;border-radius:9999px;text-transform:uppercase">${translations[lang].recommended}</span>` : ''}
+            </div>
+            <div style="padding:20px;flex:1;display:flex;flex-direction:column">
+              <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px">
+                <h4 style="font-size:17px;font-family:'Playfair Display',serif;font-weight:700;color:#fff;margin:0;flex:1">${item['name_'+lang] || item.name_es}</h4>
+                <span style="color:${PRIMARY_COLOR};font-weight:700;font-size:16px;margin-left:8px">€${item.price.toFixed(2)}</span>
+              </div>
+              <p style="color:#8E9299;font-size:11px;font-style:italic;margin:0 0 12px 0;line-height:1.5">${item['desc_'+lang] || item.desc_es}</p>
+              ${item.allergens && item.allergens.length ? `<div style="margin-bottom:12px;display:flex;flex-wrap:wrap">${item.allergens.map(a=>`<span class="allergen-pill">${a}</span>`).join('')}</div>` : ''}
+              <button onclick="addToCart('${item.id}')" style="margin-top:auto;width:100%;padding:12px;border-radius:12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#fff;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;transition:all 0.3s" onmouseover="this.style.background=PRIMARY_COLOR;this.style.color='#000'" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.color='#fff'">${translations[lang].add_btn}</button>
+            </div>
+          </div>`).join('')}
+      </div>
+    </section>`;
+  }).join('');
+}
+
+function scrollTocat(id) {
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelectorAll('.cat-btn').forEach(b => { b.style.background='rgba(255,255,255,0.05)'; b.style.color='#8E9299'; b.classList.remove('active'); });
+  const btn = document.getElementById('btn-'+id);
+  if (btn) { btn.style.background=PRIMARY_COLOR; btn.style.color='#000'; btn.classList.add('active'); }
+}
+
+function addToCart(id) {
+  const item = menuData.find(i => i.id === id);
+  if (item) { cart.push({...item, cartId: Date.now()}); updateCart(); }
+}
+
+function updateCart() {
+  const count = document.getElementById('cart-count');
+  const items = document.getElementById('cart-items');
+  const footer = document.getElementById('cart-footer');
+  const total = document.getElementById('cart-total');
+  if (count) { count.textContent = cart.length; count.style.display = cart.length ? 'flex' : 'none'; }
+  if (items) {
+    if (!cart.length) { items.innerHTML = `<div style="text-align:center;color:#8E9299;font-style:italic;padding:40px 0">${translations[lang].empty_cart}</div>`; if (footer) footer.style.display='none'; }
+    else {
+      items.innerHTML = cart.map((item,idx) => `<div style="display:flex;gap:12px;align-items:center;background:rgba(255,255,255,0.05);padding:12px;border-radius:12px"><img src="${item.image}" style="width:52px;height:52px;border-radius:8px;object-fit:cover" onerror="this.src='https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800'"><div style="flex:1"><p style="color:#fff;font-weight:700;font-size:13px;margin:0">${item['name_'+lang] || item.name_es}</p><p style="color:${PRIMARY_COLOR};font-size:12px;font-weight:700;margin:4px 0 0 0">€${item.price.toFixed(2)}</p></div><button onclick="removeFromCart(${idx})" style="background:transparent;border:none;color:#ef4444;cursor:pointer;font-size:18px">✕</button></div>`).join('');
+      if (footer) footer.style.display='block';
+      if (total) total.textContent = '€' + cart.reduce((s,i)=>s+i.price,0).toFixed(2);
+    }
+  }
+}
+
+function removeFromCart(idx) { cart.splice(idx,1); updateCart(); }
+function toggleCart() { const d=document.getElementById('cart-drawer'); if(d) d.style.display=d.style.display==='none'?'block':'none'; }
+function sendOrder() {
+  if (!cart.length) { alert('Añade algo al carrito primero'); return; }
+  const total = cart.reduce((s,i)=>s+i.price,0);
+  const text = 'Hola! Me gustaria hacer un pedido:\n\n' + cart.map(i=>('- ' + (i['name_es'] || i.name_es) + ' (EUR' + i.price.toFixed(2) + ')')).join('\n') + '\n\nTotal: EUR' + total.toFixed(2);
+  window.open('https://wa.me/' + PHONE + '?text=' + encodeURIComponent(text), '_blank');
+}
+
+window.addEventListener('load', () => { renderCats(); renderMenu(); if(window.lucide) lucide.createIcons(); });
+</script>
+</div>
+</body>
+</html>
